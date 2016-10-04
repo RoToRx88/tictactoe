@@ -23,7 +23,6 @@ class Map:
 
     def initMap(self):
         print("[debug] Initialization of the map with a size of 8.")
-        x = 0
         y = 0
 
         while y < self.size:
@@ -45,8 +44,27 @@ class Map:
             print(self.map[i])
             i += 1
 
-    def editCase(self, _x, _y, _entity):
-        self.map[int(_y) - 1][int(_x) - 1] = _entity
+    # Return True if the element is in range and is accessible, and False if any error (out of range / invalid coord)
+    def checkIfElementIsAccessible(self, _x, _y):
+        if int(_x) <= 0 or int(_x) > self.size or int(_y) <= 0 or int(_y) > self.size:
+            return False
+        elif _x.isdigit() is not True or _y.isdigit() is not True:
+            return False
+        else:
+            return True
 
+    #If the element can be placed, return True, if an error occur return False
+    def setElement(self, _x, _y, _entity):
+        if self.map[int(_y) - 1][int(_x) - 1] == ' ':
+            self.map[int(_y) - 1][int(_x) - 1] = _entity
+            return True
+        else:
+            return False
     def getElement(self, _x, _y):
-        return self.map[int(_y)][int(_x)]
+        if self.checkIfElementIsAccessible(_x, _y) is False:
+            return False
+        else:
+            return self.map[int(_y)][int(_x)]
+
+    def getRow(self, _row):
+        return self.map[_row]
