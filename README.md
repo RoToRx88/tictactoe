@@ -1,2 +1,4 @@
 # tictactoe
-Mendatory project for python lecture.
+
+## Description
+Mandatory project for python lecture.
