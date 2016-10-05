@@ -9,8 +9,6 @@ class Map:
     def __init__(self, _size = 3):
         self.size = int(_size)
         self.initMap()
-        if self.size < 3:
-            sys.exit() #TODO Find a better way to handle to low map size
 
     def createRowOfMap(self):
         tmp_array = []
@@ -22,7 +20,7 @@ class Map:
         return tmp_array
 
     def initMap(self):
-        print("[debug] Initialization of the map with a size of 8.")
+        print("[debug] Initialization of the map with a size of " + str(self.size) + ".")
         y = 0
 
         while y < self.size:
@@ -44,27 +42,31 @@ class Map:
             print(self.map[i])
             i += 1
 
-    # Return True if the element is in range and is accessible, and False if any error (out of range / invalid coord)
+    # Return True if the element is in range and is accessible, and False if any error (out of range / invalid coord) Coord are userSide coord: start @ (1, 1)
     def checkIfElementIsAccessible(self, _x, _y):
-        if int(_x) <= 0 or int(_x) > self.size or int(_y) <= 0 or int(_y) > self.size:
+        if str(_x).isdigit() is not True or str(_y).isdigit() is not True:
             return False
-        elif _x.isdigit() is not True or _y.isdigit() is not True:
+        elif int(_x) <= 0 or int(_x) > self.size or int(_y) <= 0 or int(_y) > self.size:
             return False
         else:
             return True
 
-    #If the element can be placed, return True, if an error occur return False
+    #If the element can be placed, return True, if an error occur return False Position is userSide position
     def setElement(self, _x, _y, _entity):
         if self.map[int(_y) - 1][int(_x) - 1] == ' ':
             self.map[int(_y) - 1][int(_x) - 1] = _entity
             return True
         else:
             return False
+
+    #Coordinate are userSide coord, start @ (1, 1)
     def getElement(self, _x, _y):
-        if self.checkIfElementIsAccessible(_x, _y) is False:
+        if str(_x).isdigit() is False or str(_y).isdigit() is False:
+            return False
+        if self.checkIfElementIsAccessible(int(_x), int(_y)) is False:
             return False
         else:
-            return self.map[int(_y)][int(_x)]
+            return self.map[int(_y) - 1][int(_x) - 1]
 
     def getRow(self, _row):
         return self.map[_row]
