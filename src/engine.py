@@ -1,4 +1,4 @@
-from map_generation import *
+from src.map_generation import *
 
 class Engine:
     'This is the engine of the game. Player management, win / lose / draw check, etc...'
@@ -15,7 +15,7 @@ class Engine:
 
     # Return True if the element is in range and is accessible, and False if any error (out of range / invalid coord)
     def checkIfElementIsAccessible(self, _x, _y):
-        if _x.isdigit() is not True or _y.isdigit() is not True:
+        if str(_x).isdigit() is not True or str(_y).isdigit() is not True:
             return False
         elif int(_x) <= 0 or int(_x) > self.size or int(_y) <= 0 or int(_y) > self.size:
             return False
@@ -42,9 +42,12 @@ class Engine:
     def switchPlayer(self):
         if self.current_player >= 2:
             self.current_player = 0
+            return self.current_player
         else:
             self.current_player += 1
+            return self.current_player
 
+    #Return False if no draw, True if draw
     def checkForDraw(self):
         i = 0
         draw = False
@@ -54,7 +57,7 @@ class Engine:
                 if element == ' ' and draw is False:
                     draw = True
                     break
-        i += 1
+            i += 1
         draw = not draw
         return draw
 

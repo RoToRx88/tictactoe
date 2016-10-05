@@ -1,5 +1,5 @@
-from map_generation import *
-from engine import *
+from src.map_generation import *
+from src.engine import *
 
 if __name__ == "__main__":
     size = 'a'
