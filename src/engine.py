@@ -17,7 +17,7 @@ class Engine:
     def checkIfElementIsAccessible(self, _x, _y):
         if str(_x).isdigit() is not True or str(_y).isdigit() is not True:
             return False
-        elif int(_x) <= 0 or int(_x) > self.size or int(_y) <= 0 or int(_y) > self.size:
+        elif int(_x) < 0 or int(_x) > self.size or int(_y) < 0 or int(_y) > self.size:
             return False
         else:
             return True
@@ -36,8 +36,32 @@ class Engine:
                 print("---Wrong input:")
         return x_input, y_input
 
-    def checkForWin(self, _x, _y):
+    def checkForWinRow(self, _x, _y, _player):
+        if self.game_map.getElement(x + 1, y) == self.player_icon[_player] and self.game_map.getElement(x + 2, y) == self.player_icon[_player]:
+            return True
+        elif self.game_map.getElement(x + 1, y) == self.player_icon[_player] and self.game_map.getElement(x - 1, y) == self.player_icon[_player]:
+            return True
+        elif self.game_map.getElement(x - 1, y) == self.player_icon[_player] and self.game_map.getElement(x - 2, y) == self.player_icon[_player]:
+            return True
+        else:
+            return False
+
+    def checkForWinColumn(self, _x, _y, _player):
+        if self.game_map.getElement(x, y + 1) == self.player_icon[_player] and self.game_map.getElement(x, y + 2) == self.player_icon[_player]:
+            return True
+        elif self.game_map.getElement(x, y + 1) == self.player_icon[_player] and self.game_map.getElement(x, y - 1) == self.player_icon[_player]:
+            return True
+        elif self.game_map.getElement(x, y - 1) == self.player_icon[_player] and self.game_map.getElement(x, y - 2) == self.player_icon[_player]:
+            return True
+        else:
+            return False
+
+# TODO need to check diag and diag inverted !!!!!
+
+    def checkForWin(self, _x, _y, _player):
+
         print("TODO: Be careful of the vector of check")
+
 
     def switchPlayer(self):
         if self.current_player >= 2:

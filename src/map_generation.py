@@ -42,31 +42,30 @@ class Map:
             print(self.map[i])
             i += 1
 
-    # Return True if the element is in range and is accessible, and False if any error (out of range / invalid coord) Coord are userSide coord: start @ (1, 1)
+    # Return True if the element is in range and is accessible, and False if any error (out of range / invalid coord)
     def checkIfElementIsAccessible(self, _x, _y):
         if str(_x).isdigit() is not True or str(_y).isdigit() is not True:
             return False
-        elif int(_x) <= 0 or int(_x) > self.size or int(_y) <= 0 or int(_y) > self.size:
+        elif int(_x) < 0 or int(_x) > self.size or int(_y) < 0 or int(_y) > self.size:
             return False
         else:
             return True
 
-    #If the element can be placed, return True, if an error occur return False Position is userSide position
+    #If the element can be placed, return True, if an error occur return False
     def setElement(self, _x, _y, _entity):
-        if self.map[int(_y) - 1][int(_x) - 1] == ' ':
-            self.map[int(_y) - 1][int(_x) - 1] = _entity
+        if self.map[int(_y)][int(_x)] == ' ':
+            self.map[int(_y)][int(_x)] = _entity
             return True
         else:
             return False
 
-    #Coordinate are userSide coord, start @ (1, 1)
     def getElement(self, _x, _y):
         if str(_x).isdigit() is False or str(_y).isdigit() is False:
             return False
         if self.checkIfElementIsAccessible(int(_x), int(_y)) is False:
             return False
         else:
-            return self.map[int(_y) - 1][int(_x) - 1]
+            return self.map[int(_y)][int(_x)]
 
     def getRow(self, _row):
         return self.map[_row]

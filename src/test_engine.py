@@ -6,15 +6,12 @@ class TestEngine(TestCase):
     def test_checkIfElementIsAccessible(self):
         e = Engine(4)
         self.assertIs(e.checkIfElementIsAccessible(1, 1), True)
-        self.assertIs(e.checkIfElementIsAccessible(0, 0), False)
+        self.assertIs(e.checkIfElementIsAccessible(0, 0), True)
         self.assertIs(e.checkIfElementIsAccessible(50, 50), False)
         self.assertIs(e.checkIfElementIsAccessible(1, 59), False)
         self.assertIs(e.checkIfElementIsAccessible(39248, 2), False)
         self.assertIs(e.checkIfElementIsAccessible('', ''), False)
         self.assertIs(e.checkIfElementIsAccessible('zqmeofij', 'zoei'), False)
-
-    def test_getInputFromPlayer(self):
-        self.fail()
 
     def test_checkForWin(self):
         self.fail()
@@ -38,4 +35,3 @@ class TestEngine(TestCase):
                 e.game_map.setElement(x, y, 'o')
         e.game_map.promptMap()
         self.assertIs(e.checkForDraw(), True)
-()
